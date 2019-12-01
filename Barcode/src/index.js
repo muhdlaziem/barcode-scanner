@@ -5,8 +5,9 @@ import {createMaterialBottomTabNavigator,} from 'react-navigation-material-botto
 import tabBarIcon from './shared/tabBarIcon';
 
 import view from './List/view';
-import GeneratorTab from './QRGenerator';
+import qrcodegenerator from './QRGenerator/qrcodegenerator';
 import add from './Scan/add';
+import Camera from './Scan/Camera'
 
 
 const BottomTabMaterial = createMaterialBottomTabNavigator(
@@ -18,13 +19,13 @@ const BottomTabMaterial = createMaterialBottomTabNavigator(
       }
     },
     Scanner:{
-      screen: add,
+      screen: Camera,
       navigationOptions: {
         tabBarIcon: tabBarIcon('search'),
       }
     },
     Generator:{
-      screen: GeneratorTab,
+      screen: qrcodegenerator,
       navigationOptions: {
         tabBarIcon: tabBarIcon('qrcode'),
       }
