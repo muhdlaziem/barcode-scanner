@@ -4,21 +4,21 @@ import { createAppContainer } from 'react-navigation';
 import {createMaterialBottomTabNavigator,} from 'react-navigation-material-bottom-tabs';
 import tabBarIcon from './shared/tabBarIcon';
 
-import ListTab from './List';
+import view from './List/view';
 import GeneratorTab from './QRGenerator';
-import ScannerTab from './Scan';
+import add from './Scan/add';
 
 
 const BottomTabMaterial = createMaterialBottomTabNavigator(
   {
     List:{
-      screen: ListTab,
+      screen: view,
       navigationOptions: {
         tabBarIcon: tabBarIcon('list'),
       }
     },
     Scanner:{
-      screen: ScannerTab,
+      screen: add,
       navigationOptions: {
         tabBarIcon: tabBarIcon('search'),
       }
