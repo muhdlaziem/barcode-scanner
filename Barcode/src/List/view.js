@@ -4,18 +4,22 @@ import {
     Text,
     StyleSheet,
     TouchableOpacity,
-    StatusBar
+    StatusBar,
+    Linking,
+    Alert,Button
 } from "react-native";
 import SplashScreen from 'react-native-splash-screen';
 import {app} from '../fbconfig';
 import { Colors } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
+import Modal from 'react-native-modal'
 
 export default class view extends Component {
     constructor(props){
         super(props);
         this.state = {
-            content:[]
+            content:[],
+            isModalVisible:false
         }
     }
     componentDidMount(){
@@ -38,7 +42,15 @@ export default class view extends Component {
             console.log((this.state.content))
         });
     }
+    onOpenlink(link){
+      //Function to open URL, If scanned 
+      Linking.openURL(link);
+      //Linking used to open the URL in any browser that you have installed
+    }
     
+    toggleModal =()=> {
+      this.setState({ isModalVisible: !this.state.isModalVisible });
+    };
     render() {
         return(
             
@@ -49,12 +61,26 @@ export default class view extends Component {
                   <Text style={{color:'white', fontWeight: 'bold'}}>Barcode List</Text>
                 </View>
                 {this.state.content.map((y)=>{
+                  // this.setState({Link: y.Link})
                 return(
-                <TouchableOpacity>
+                 
+                  <TouchableOpacity
+                    onPress={y.Link.includes("http")? ()=>this.onOpenlink(y.Link):null}
+                    onLongPress={this.toggleModal}
+                    
+                  >
+                    <Modal isVisible={this.state.isModalVisible}>
+                      <View style={{ flex: 1 }}>
+                        <Text></Text>
+                        <Text style={{marginTop: 10, color: 'white'}}>Hello!</Text>
+                        <Button title="Close" onPress={this.toggleModal} />
+                      </View>
+                    </Modal>
                     <View style={styles.listItem}>
                       <Text style={{color:'black'}}>{y.Link}</Text>
                     </View>
-                </TouchableOpacity>
+                  </TouchableOpacity>
+                    
                   );
                 })}
               </ScrollView>
