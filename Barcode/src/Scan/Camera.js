@@ -27,7 +27,7 @@ export default class App extends Component {
     let updates = {};
     updates['/item/' + newPostKey] = {Link:qrvalue}
     app.database().ref().update(updates);
-    console.ignoredYellowBox = ['Setting a timer'];
+    // console.ignoredYellowBox = ['Setting a timer'];
     // db.ref('/items').push({
     //     desc : item
     // });

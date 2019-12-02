@@ -36,16 +36,16 @@ class qrcodegenerator extends Component {
                     //Logo of in the center of QR Code (Optional)
                     logo={{
                         uri:
-                        'https://raw.githubusercontent.com/AboutReact/sampleresource/master/logosmalltransparen.png',
+                        'https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/Barcode/images/icon.png',
                     }}
                     //Center Logo size  (Optional)
-                    logoSize={30}
+                    logoSize={60}
                     //Center Logo margin (Optional)
                     logoMargin={2}
                     //Center Logo radius (Optional)
                     logoBorderRadius={15}
                     //Center Logo background (Optional)
-                    logoBackgroundColor="yellow"
+                    // logoBackgroundColor="yellow"
                 />
                 <TextInput
                     // Input to get the value to set on QRCode
