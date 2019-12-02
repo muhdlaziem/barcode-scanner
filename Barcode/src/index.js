@@ -12,7 +12,7 @@ import Camera from './Scan/Camera'
 
 const BottomTabMaterial = createMaterialBottomTabNavigator(
   {
-    List:{
+    History:{
       screen: view,
       navigationOptions: {
         tabBarIcon: tabBarIcon('list'),

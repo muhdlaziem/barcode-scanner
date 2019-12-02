@@ -2,7 +2,7 @@
 //This is an example code to Scan QR code//
 import React, { Component } from 'react';
 //import react in our code.
-import { Text, View, Linking, TouchableOpacity, PermissionsAndroid, Platform, StyleSheet, Image} from 'react-native';
+import { Text, View, Linking, TouchableOpacity, PermissionsAndroid, Platform, StyleSheet, Image, StatusBar} from 'react-native';
 // import all basic components
 import SplashScreen from 'react-native-splash-screen';
 import { CameraKitCameraScreen, } from 'react-native-camera-kit';
@@ -79,7 +79,12 @@ export default class App extends Component {
     //If qrvalue is set then return this view
     if (!this.state.opneScanner) {
       return (
-        <View style={styles.container}>
+        <View style={styles.screen}>
+          <StatusBar backgroundColor="#239b56" barStyle="light-content"/>
+          <View style={styles.title}>
+                  <Text style={{color:'white', fontWeight: 'bold'}}>Scan Code</Text>
+                </View>
+          <View style={styles.container}>
             <Image source={require('./images/barcode.png')}
             style={{width: 150, height: 150}}/>
 
@@ -113,7 +118,7 @@ export default class App extends Component {
                 Open QR Scanner
                 </Text>
             </TouchableOpacity>
-        </View>
+            </View></View>
       );
     }
     return (
@@ -138,12 +143,23 @@ export default class App extends Component {
   }
 }
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor:'white'
   },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    alignItems: 'center',
+    padding: 10,
+    backgroundColor: '#239b56',
+    width: '100%'
+},
   webContainer: {
     width: '100%',
     height: 40,

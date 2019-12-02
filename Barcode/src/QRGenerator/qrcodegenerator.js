@@ -4,7 +4,8 @@ import {
     Text,
     StyleSheet,
     TextInput,
-    TouchableOpacity
+    TouchableOpacity,
+    StatusBar
 } from "react-native";
 
 import QRCode from 'react-native-qrcode-svg';
@@ -22,9 +23,13 @@ class qrcodegenerator extends Component {
     }
     render() {
         return (
-            <View style={styles.MainContainer}>
-                <Text>qrcodegenerator</Text>
-                <QRCode
+            <View style={styles.screen}>
+                 <StatusBar backgroundColor="#239b56" barStyle="light-content"/>
+                 <View style={styles.title}>
+                    <Text style={{color:'white', fontWeight: 'bold'}}>QR Code Generator</Text>
+                 </View>
+                 <View style={styles.MainContainer}>
+                 <QRCode
                     //QR code value
                     value={this.state.valueForQRCode ? this.state.valueForQRCode:'NA'}
                     //size of QR Code
@@ -52,14 +57,14 @@ class qrcodegenerator extends Component {
                     style={styles.TextInputStyle}
                     onChangeText={text => this.setState({ inputValue: text })}
                     underlineColorAndroid="transparent"
-                    placeholder="Enter text to Generate QR Code"
+                    placeholder="Enter Your Website"
                 />
                 <TouchableOpacity
                     onPress={this.getTextInputValue}
                     activeOpacity={0.7}
                     style={styles.button}>
-                    <Text style={styles.TextStyle}> Generate QR Code </Text>
-                </TouchableOpacity>
+                    <Text style={styles.TextStyle}>Generate QR Code</Text>
+                </TouchableOpacity></View>
             </View>
         );
     }
@@ -67,30 +72,45 @@ class qrcodegenerator extends Component {
 export default qrcodegenerator;
 
 const styles = StyleSheet.create({
-    MainContainer: {
+    screen: {
       flex: 1,
-      margin: 10,
       alignItems: 'center',
       paddingTop: 40,
+      width: "100%"
+    },
+    MainContainer: {
+        flex: 1,
+        margin: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: 40,
+        width: "70%"
+      },
+    title: {
+        alignItems: 'center',
+        padding: 10,
+        backgroundColor: '#239b56',
+        width: '100%',
+        marginTop: -40
     },
     TextInputStyle: {
-      width: '100%',
-      height: 40,
-      marginTop: 20,
-      borderWidth: 1,
-      textAlign: 'center',
-    },
-    button: {
-      width: '100%',
-      paddingTop: 8,
-      marginTop: 10,
-      paddingBottom: 8,
-      backgroundColor: '#F44336',
-      marginBottom: 20,
-    },
-    TextStyle: {
-      color: '#fff',
-      textAlign: 'center',
-      fontSize: 18,
-    },
+        width: '100%',
+        height: 40,
+        marginTop: 20,
+        borderWidth: 1,
+        textAlign: 'center',
+      },
+      button: {
+        width: '100%',
+        paddingTop: 8,
+        marginTop: 10,
+        paddingBottom: 8,
+        backgroundColor: '#2ecc71',
+        marginBottom: 20,
+      },
+      TextStyle: {
+        color: '#fff',
+        textAlign: 'center',
+        fontSize: 18,
+      }
   });

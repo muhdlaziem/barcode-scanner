@@ -58,7 +58,7 @@ export default class view extends Component {
               <StatusBar backgroundColor="#239b56" barStyle="light-content"/>
               <ScrollView>
                 <View style={styles.title}>
-                  <Text style={{color:'white', fontWeight: 'bold'}}>Barcode List</Text>
+                  <Text style={{color:'white', fontWeight: 'bold'}}>Barcode History</Text>
                 </View>
                 {this.state.content.map((y)=>{
                   // this.setState({Link: y.Link})
@@ -69,10 +69,10 @@ export default class view extends Component {
                     onLongPress={this.toggleModal}
                     
                   >
-                    <Modal isVisible={this.state.isModalVisible}>
-                      <View style={{ flex: 1 }}>
+                    <Modal isVisible={this.state.isModalVisible} backdropColor='white'>
+                      <View style={styles.listItem2}>
                         <Text></Text>
-                        <Text style={{marginTop: 10, color: 'white'}}>Hello!</Text>
+                        <Text style={{marginBottom: 30}}>Delete feature still in progress</Text>
                         <Button title="Close" onPress={this.toggleModal} />
                       </View>
                     </Modal>
@@ -105,9 +105,17 @@ const styles = StyleSheet.create({
     listItem: {
         padding: 20,
         borderBottomWidth: 1,
-        borderBottomColor: '#239b56',
+        borderBottomColor: '#bdc3c7',
         // backgroundColor: '#2ecc71',
         // marginTop: 10,
         // marginHorizontal: 50
-    }
+    },
+    listItem2: {
+      padding: 20,
+      justifyContent: 'center',
+      alignItems: 'center'
+      // backgroundColor: '#2ecc71',
+      // marginTop: 10,
+      // marginHorizontal: 50
+  }
   });
