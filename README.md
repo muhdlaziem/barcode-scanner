@@ -1,3 +1,3 @@
 # barcode-scanner
 
- Run 'npm install' for Android configuration.
+ Run 'cd Barcode/' and 'npm install' for Android configuration.
