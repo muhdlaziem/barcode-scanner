@@ -1,5 +1,16 @@
 # barcode-scanner
 
+### Group Members (An -Nahlu MBT)
+Name                                     | Matric No
+---------------------------------------- | :---------:
+Muhammad Syafiq Bin Mohd Faudzy `(Leader)` | 1623765
+Muhammad Laziem Bin Shafie               | 1621781
+Muhamad Amir Syafiq Bin Abd Hadi         | 1629953
+Nik Ahmad Faiz Bin Mohd Fauzi            | 1623399
+Asif Azamuddin Bin Mohd Jawali           | 1629405
+
+
+
 ### 1.0 Configuration
 Run this for Android Configuration
 ```
@@ -8,13 +19,14 @@ Run this for Android Configuration
 ```
  
 ### 2.0 Introduction
-QR code is simply method that user can use to visit any particular websites without the need of typing the whole address. Mostly, businesses are using QR codes as a tool for marketing their company. QR code needs QR Scanner or QR Reader to utilize its functionality. There are a lot of QR codes application scanners with variety of features. Even though, there are a lot of QR scanners out there, they do not simply provide a simple and a good user experience.
+QR code is simply method that user can use to visit any particular websites without the need of typing the whole address. Mostly, businesses are using QR codes as a tool for marketing their company. QR code needs QR Scanner or QR Reader to utilize its functionality. There are a lot of QR codes application scanners with variety of features. Even though, there are a lot of QR scanners out there, they do not simply provide a simple and a good user experience. This particluar project is included QR Generator which very convenience for those who wants to create a QR Code.
 
 
 ### 3.0 Objective
-1. The main objective for the application is to help user utilizing the QR code simplicity
-2. To create a simple and user friendly application 
-3. To help user to save any url that user might want to use in future.
+1. The main objective for the application is to help user utilizing the QR code simplicity.
+2. To create a simple and user friendly application.
+3. To help user to save / delete any url that user might want to use in future.
+4. To help user generate their own QR Code.
 ### 4.0 Features and Functionalities
 Features
 * Barcode/ QR Code Scanner
