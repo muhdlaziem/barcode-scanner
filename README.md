@@ -8,8 +8,26 @@ Run this for Android Configuration
 ```
  
 ### 2.0 Introduction
+QR code is simply method that user can use to visit any particular websites without the need of typing the whole address. Mostly, businesses are using QR codes as a tool for marketing their company. QR code needs QR Scanner or QR Reader to utilize its functionality. There are a lot of QR codes application scanners with variety of features. Even though, there are a lot of QR scanners out there, they do not simply provide a simple and a good user experience.
+
+
 ### 3.0 Objective
+1. The main objective for the application is to help user utilizing the QR code simplicity
+2. To create a simple and user friendly application 
+3. To help user to save any url that user might want to use in future.
 ### 4.0 Features and Functionalities
+Features
+* Barcode/ QR Code Scanner
+* QR Code Generator
+* Authentication
+* Save History
+
+API used
+* firebase
+* react-native-camera-kit
+* react-native-qrcode-svg
+
+
 ### 5.0 Screen Navigation
 * API used for navigation
     1. React Navigation Stack
@@ -18,13 +36,13 @@ Run this for Android Configuration
 * Screen
     1. Splash Screen
     
-     ![Splash Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/Barcode/images/icon.png)
+     ![Splash Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/fdssfds.jpg)
     
     User will be prompted with splash screen when they open the application.
     _____________________
     2. Login Page
     
-     ![Splash Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/Barcode/images/icon.png)
+     ![Login Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/Login.jpg)
     
     User need to sign in before the Home Page is prompted. If user does not have any account, they need to click to Sign Up button to be redirected to Sign Up page.
     
@@ -36,7 +54,7 @@ Run this for Android Configuration
     
     3. Sign Up Page
     
-     ![Splash Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/Barcode/images/icon.png)
+     ![Sign Up Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/Sign%20Up.jpg)
     
     User will fill in their email and password in order to register. If user fill in with wrong password or email, an alert will popup. Upon Successfully registered, a popup will be prompt and user will be redirect to Login Page.
     
@@ -48,7 +66,7 @@ Run this for Android Configuration
 
     4. Scanner Page
     
-    ![Splash Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/Barcode/images/icon.png)
+    ![Home Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/Home.jpg)
     
     This is the Scanner Page or Home Page. If user want to scan any barcode , they just need to click on the Open QR Scanner and the camera page will be prompt.
     
@@ -59,7 +77,7 @@ Run this for Android Configuration
         
     5. QR Generator Page
     
-    ![Splash Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/Barcode/images/icon.png)
+    ![QR Generator Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/Gene.jpg)
     
     This is the QR Generator Page. User will fill with any link that they desired in the text field ,click the Generate QR Code button and an image of the QR will be generated.
     
@@ -71,7 +89,7 @@ Run this for Android Configuration
 
     6. History List
     
-    ![Splash Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/Barcode/images/icon.png)
+    ![History Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/List.jpg)
     
     This is the History List Page. Every link that was scanned by the user will be saved in the history list. User can delete any link by holding the link and a popup message will pop.
     
@@ -82,4 +100,22 @@ Run this for Android Configuration
     _____________________
         
 ### 6.0 Sequence Diagram
-### 7.0 References
+* Login
+
+![Login SD](https://github.com/muhdlaziem/barcode-scanner/blob/master/images/Login%20-%20SD.jpg)
+* Logout
+
+![Logout SD](https://github.com/muhdlaziem/barcode-scanner/blob/master/images/Logout%20-%20SD.jpg)
+* Register
+
+![Register SD](https://github.com/muhdlaziem/barcode-scanner/blob/master/images/Register%20-%20SD.jpg)
+* Scanner
+
+![Scanner SD](https://github.com/muhdlaziem/barcode-scanner/blob/master/images/Scanner%20-%20SD.jpg)
+* QR code generator
+
+![QRGene SD](https://github.com/muhdlaziem/barcode-scanner/blob/master/images/Generator%20-%20SD.jpg)
+* History List
+
+![History SD](https://github.com/muhdlaziem/barcode-scanner/blob/master/images/History%20-%20SD.jpg)
+
