@@ -1,16 +1,16 @@
 # barcode-scanner
 
-### Configuration
+### 1.0 Configuration
 Run this for Android Configuration
 ```
  cd Barcode/
  npm install
 ```
  
-### Introduction
-### Objective
-### Features and Functionalities
-### Screen Navigation
+### 2.0 Introduction
+### 3.0 Objective
+### 4.0 Features and Functionalities
+### 5.0 Screen Navigation
 * API used for navigation
     1. React Navigation Stack
     2. Material Bottom Tab Navigator
@@ -81,5 +81,5 @@ Run this for Android Configuration
         
     _____________________
         
-### Sequence Diagram
-### References
+### 6.0 Sequence Diagram
+### 7.0 References
