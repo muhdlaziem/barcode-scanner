@@ -1,7 +1,11 @@
 # barcode-scanner
 
 ### Configuration
- Run **'cd Barcode/'** and **'npm install'** for Android configuration.
+Run this for Android Configuration
+```
+ cd Barcode/
+ npm install
+```
  
 ### Introduction
 ### Objective
