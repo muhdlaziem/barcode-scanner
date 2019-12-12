@@ -39,6 +39,13 @@ API used
 * react-native-camera-kit
 * react-native-qrcode-svg
 
+Functionalities
+* CRUD operation using firebase
+* Zoom out/in when using Scanner
+* Save generated QR Code
+* Saved History aligned with user account
+* Copy/Paste/Cut functionalities
+
 
 ### 5.0 Screen Navigation
 * API used for navigation
