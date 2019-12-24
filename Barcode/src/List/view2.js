@@ -10,9 +10,10 @@ import {
 } from "react-native";
 import SplashScreen from 'react-native-splash-screen';
 import {app} from '../CRUD/fbconfig';
+import {deleteLink} from '../CRUD/CRUD'
 import { Colors } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
-import Modal from 'react-native-modal'
+import {ListItem} from 'react-native-elements';
 
 export default class view extends Component {
     constructor(props){
@@ -43,14 +44,29 @@ export default class view extends Component {
         });
     }
     onOpenlink(link){
-      //Function to open URL, If scanned 
-      Linking.openURL(link);
-      //Linking used to open the URL in any browser that you have installed
+
+      if(link.includes('http')){
+        Linking.openURL(link);
+      }
+      else if(link.includes('exp')){
+        Linking.openURL(link);
+      }
+      else if(link.includes('www'))
+        Linking.openURL('https://'+link);
     }
     
-    toggleModal =()=> {
-      this.setState({ isModalVisible: !this.state.isModalVisible });
-    };
+
+    deleteConfirmation = (id) => {
+      Alert.alert(
+        'Status', 
+        'Are you sure you want to delete this student?',
+        [
+          {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+          {text: 'OK', onPress: () => deleteLink(id)}
+        ],
+        { cancelable: false }
+        );
+    }
     render() {
         return(
             
@@ -60,27 +76,15 @@ export default class view extends Component {
                 <View style={styles.title}>
                   <Text style={{color:'white', fontWeight: 'bold'}}>Barcode History</Text>
                 </View>
-                {this.state.content.map((y)=>{
+                {this.state.content.map((y,index)=>{
                   // this.setState({Link: y.Link})
-                return(
-                 
-                  <TouchableOpacity
-                    onPress={y.Link.includes("http")? ()=>this.onOpenlink(y.Link):null}
-                    onLongPress={this.toggleModal}
-                    
-                  >
-                    <Modal isVisible={this.state.isModalVisible} backdropColor='white'>
-                      <View style={styles.listItem2}>
-                        <Text></Text>
-                        <Text style={{marginBottom: 30}}>Delete feature still in progress</Text>
-                        <Button title="Close" onPress={this.toggleModal} />
-                      </View>
-                    </Modal>
-                    <View style={styles.listItem}>
-                      <Text style={{color:'black'}}>{y.Link}</Text>
-                    </View>
-                  </TouchableOpacity>
-                    
+                  return(
+                    <ListItem
+                    key={index}
+                    title={y.Link}
+                    onPress = {()=>this.onOpenlink(y.Link)}
+                    onLongPress={() => {this.deleteConfirmation(y.key)}}
+                    bottomDivider/>
                   );
                 })}
               </ScrollView>

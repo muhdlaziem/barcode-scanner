@@ -2,46 +2,79 @@
 //This is an example code to Scan QR code//
 import React, { Component } from 'react';
 //import react in our code.
-import { Text, View, Linking, TouchableOpacity, PermissionsAndroid, Platform, StyleSheet, Image, StatusBar} from 'react-native';
+import {Text,
+        View,
+        Linking,
+        TouchableOpacity,
+        PermissionsAndroid,
+        Platform,
+        StyleSheet,
+        Image,
+        StatusBar,
+        BackHandler} from 'react-native';
 // import all basic components
 import SplashScreen from 'react-native-splash-screen';
 import { CameraKitCameraScreen, } from 'react-native-camera-kit';
-import {app} from '../fbconfig';
+import {addLink} from '../CRUD/CRUD';
 //import CameraKitCameraScreen we are going to use.
 export default class App extends Component {
     componentDidMount(){
         SplashScreen.hide()
       }
     
-    constructor() {
-    super();
+    constructor(props) {
+    super(props);
     this.state = {
       //variable to hold the qr value
       qrvalue: '',
       opneScanner: false,
+      isLink: false
     };
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+  }
+  
+  componentWillMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
   }
 
-  addItem =(qrvalue) => {
-    let newPostKey = app.database().ref().child('item').push().key;
-    let updates = {};
-    updates['/item/' + newPostKey] = {Link:qrvalue}
-    app.database().ref().update(updates);
-    // console.ignoredYellowBox = ['Setting a timer'];
-    // db.ref('/items').push({
-    //     desc : item
-    // });
-}
+  componentWillUnmount() {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+  }
 
-  onOpenlink() {
-    //Function to open URL, If scanned 
-    Linking.openURL(this.state.qrvalue);
-    //Linking used to open the URL in any browser that you have installed
+  handleBackButtonClick() {
+      this.props.navigation.goBack(null);
+      this.setState({opneScanner:false,isLink:false})
+
+      return true;
+  }
+
+  onOpenlink=()=> {
+    if(this.state.qrvalue.includes('http')){
+      Linking.openURL(this.state.qrvalue);
+    }
+    else if(this.state.qrvalue.includes('exp')){
+      Linking.openURL(this.state.qrvalue);
+    }
+    else if(this.state.qrvalue.includes('www'))
+      Linking.openURL('https://'+this.state.qrvalue);
   }
   onBarcodeScan(qrvalue) {
     //called after te successful scanning of QRCode/Barcode
     this.setState({ qrvalue: qrvalue });
     this.setState({ opneScanner: false });
+    // this.setState({isLink: true});
+    if(qrvalue.includes('http')){
+    this.setState({isLink: true}, ()=>console.log(`isLink: ${this.state.isLink}`));
+    }
+    else if(qrvalue.includes('exp')){
+      this.setState({isLink: true}, ()=>console.log(`isLink: ${this.state.isLink}`));
+    }
+    else if(qrvalue.includes('www'))
+      this.setState({isLink: true}, ()=>console.log(`isLink: ${this.state.isLink}`));
+    else{
+      this.setState({isLink: false}, ()=>console.log(`isLink: ${this.state.isLink}`));
+
+    }
   }
   onOpneScanner() {
     var that =this;
@@ -91,7 +124,8 @@ export default class App extends Component {
             <Text style={styles.simpleText}>{this.state.qrvalue ? 'Result: '+this.state.qrvalue : ''}</Text>
             
             <View style={{flexDirection: "row"}}>
-            {this.state.qrvalue.includes("http") ?
+            { 
+            this.state.isLink ?
 
               <TouchableOpacity
                 onPress={() => this.onOpenlink()}
@@ -104,7 +138,7 @@ export default class App extends Component {
             {this.state.qrvalue ?
 
             <TouchableOpacity
-            onPress={() => this.addItem(this.state.qrvalue)}
+            onPress={() => addLink(this.state.qrvalue)}
             style={styles.button2}>
               <Text style={{ color: '#FFFFFF', fontSize: 12}}>Save</Text>
             </TouchableOpacity>
@@ -124,20 +158,31 @@ export default class App extends Component {
     return (
       <View style={{ flex: 1 }}>
         <CameraKitCameraScreen
-          showFrame={false}
+          actions={{leftButtonText: 'Cancel' }}
+          cameraOptions={{
+            flashMode: 'auto',             // on/off/auto(default)
+            focusMode: 'on',               // off/on(default)
+            zoomMode: 'on',                // off/on(default)
+            ratioOverlay:'1:1',            // optional, ratio overlay on the camera and crop the image seamlessly
+            ratioOverlayColor: '#00000077' // optional
+          }}
+          onBottomButtonPressed={(event) => this.setState({opneScanner:event.captureRetakeMode,isLink:false})}
+          showFrame={true}
           //Show/hide scan frame
           scanBarcode={true}
           //Can restrict for the QR Code only
-          laserColor={'blue'}
+          laserColor={'red'}
           //Color can be of your choice
-          frameColor={'yellow'}
+          frameColor={'green'}
           //If frame is visible then frame color
           colorForScannerFrame={'black'}
           //Scanner Frame color
           onReadCode={event =>
             this.onBarcodeScan(event.nativeEvent.codeStringValue)
           }
+          
         />
+        {/* <TouchableOpacity onPress={this.setState({opneScanner:false})}><Text>X</Text></TouchableOpacity> */}
       </View>
     );
   }
