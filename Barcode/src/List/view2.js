@@ -14,7 +14,7 @@ import {deleteLink} from '../CRUD/CRUD'
 import { Colors } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import {ListItem} from 'react-native-elements';
-
+import * as firebase from "firebase";
 import {CurrentUser} from '../Login/Login'
 
 export default class view extends Component {
@@ -31,7 +31,7 @@ export default class view extends Component {
             console.log(snapshot.val())
             let data = [];
             snapshot.forEach(child =>{
-              if(child.val().User===CurrentUser){
+              if(child.val().User===firebase.auth().currentUser.email){
                 data.push({
                   Link: child.val().Link,
                   key: child.key,

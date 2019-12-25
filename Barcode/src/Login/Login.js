@@ -43,7 +43,8 @@ export default class App extends Component {
         .signInWithEmailAndPassword(this.state.email, this.state.password)
         .then(() => {
         this.props.navigation.navigate('Home'); //Successfully Login
-        CurrentUser = this.state.email
+        CurrentUser = firebase.auth().currentUser.email
+        console.log(firebase.auth().currentUser.email);
         })
         .catch(error => {
           this.setState({condInval: true},);
@@ -56,7 +57,10 @@ export default class App extends Component {
   }
 };
 
+
+
   render(){
+
     return(
       <View style={styles.screen}>
       <StatusBar backgroundColor = "white" barStyle = "dark-content"/>
