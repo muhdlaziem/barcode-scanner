@@ -11,16 +11,33 @@ import {
 import QRCode from 'react-native-qrcode-svg';
 
 class qrcodegenerator extends Component {
+    svg;
     constructor(){
         super();
         this.state = {
             inputValue:'',
-            valueForQRCode:''
+            valueForQRCode:'',
         }
+
     }
     getTextInputValue = () =>{
         this.setState({valueForQRCode:this.state.inputValue})
+        console.log(this.state.valueForQRCode)
+        this.getDataURL
     }
+    
+    shareQR=() =>{
+        this.svg.toDataURL((data) => {
+          const shareImageBase64 = {
+            title: "QR",
+            message: "Ehi, this is my QR code",
+            url: `data:image/png;base64,${data}`
+          };
+          console.log(shareImageBase64)
+        //   Share.open(shareImageBase64);
+        });
+    }
+
     render() {
         return (
             <View style={styles.screen}>
@@ -51,6 +68,7 @@ class qrcodegenerator extends Component {
                     logoBorderRadius={15}
                     //Center Logo background (Optional)
                     // logoBackgroundColor="yellow"
+                    getRef={(c) =>{this.svg=c}}
                 />
                 <TextInput
                     // Input to get the value to set on QRCode
@@ -61,6 +79,7 @@ class qrcodegenerator extends Component {
                 />
                 <TouchableOpacity
                     onPress={this.getTextInputValue}
+                    onLongPress={this.shareQR}
                     activeOpacity={0.7}
                     style={styles.button}>
                     <Text style={styles.TextStyle}>Generate QR Code</Text>
