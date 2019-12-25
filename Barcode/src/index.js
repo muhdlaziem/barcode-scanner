@@ -11,6 +11,7 @@ import qrcodegenerator from './QRGenerator/qrcodegenerator';
 import Camera from './Scan/Camera'
 import LoginScreen from './Login/Login';
 import SignUpScreen from './Login/SignUp';
+import Profile from './Profile/Profile';
 
 
 const BottomTabMaterial = createMaterialBottomTabNavigator(
@@ -33,6 +34,13 @@ const BottomTabMaterial = createMaterialBottomTabNavigator(
         tabBarIcon: tabBarIcon('qrcode'),
       }
     },
+    Profile:{
+      screen: Profile,
+      navigationOptions: {
+        tabBarIcon: tabBarIcon('user'),
+      }
+    },
+ 
  
   },
 

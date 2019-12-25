@@ -4,6 +4,7 @@ import * as firebase from "firebase";
 import CustomAlert from './Component/CustomAlert';
 
 import {app} from '../CRUD/fbconfig';
+
 export default class SignUp extends Component {
     
     //Change Header 
@@ -22,6 +23,7 @@ export default class SignUp extends Component {
         condInval: false, //Alert for invalid
         condInvalExist: false, //Alert for invalid
         status: true, //status either error or successful sign up
+        error:null
       };
     }
     
@@ -50,16 +52,18 @@ export default class SignUp extends Component {
     SignUp = () =>{
     try {
        if(this.state.email && this.state.password){
-        app
+        firebase
             .auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then(user => { 
                    console.log(user);
+                   addEmail(this.state.email);
                    this.setState({condSucc: true},); //Successfully sign up
              })
             .catch(error => {
              //Alert.alert('Status',error.toString(error)); //Checking if username already existed
-             this.setState({condInvalExist: true},);
+             console.log(error)
+             this.setState({condInvalExist: true, error:error.message},);
             });
        } else {
           this.setState({condInval: true},); //Invalid username and password
@@ -99,7 +103,7 @@ export default class SignUp extends Component {
 
       <View style = {styles.buttonContainer}>
       <Button color="#65a171"
-       onPress={() => this.SignUp(this.state.email, this.state.password)}
+       onPress={this.SignUp}
        title='SIGN UP'/>
       </View>
       
@@ -130,7 +134,7 @@ export default class SignUp extends Component {
           displayAlert={this.state.condInvalExist}
           //displayAlertIcon={true} //untuk show icon
           alertTitleText={' '}
-          alertMessageText={'Username is already used'}
+          alertMessageText={this.state.error}
           displayPositiveButton={true}
           positiveButtonText={'OK'}
           onPressPositiveButton={this.onPressExistingUserButton}

@@ -15,6 +15,8 @@ import { Colors } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import {ListItem} from 'react-native-elements';
 
+import {CurrentUser} from '../Login/Login'
+
 export default class view extends Component {
     constructor(props){
         super(props);
@@ -29,10 +31,14 @@ export default class view extends Component {
             console.log(snapshot.val())
             let data = [];
             snapshot.forEach(child =>{
-              data.push({
-                Link: child.val().Link,
-                key: child.key
-              });
+              if(child.val().User===CurrentUser){
+                data.push({
+                  Link: child.val().Link,
+                  key: child.key,
+                  User: child.val().User
+                });
+              }
+             
             });
             this.setState({
               content:data
@@ -67,6 +73,7 @@ export default class view extends Component {
         { cancelable: false }
         );
     }
+    
     render() {
         return(
             

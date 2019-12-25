@@ -17,6 +17,8 @@ import SplashScreen from 'react-native-splash-screen';
 import { CameraKitCameraScreen, } from 'react-native-camera-kit';
 import {addLink} from '../CRUD/CRUD';
 //import CameraKitCameraScreen we are going to use.
+
+// import {CurrentUser} from '../Login/Login';
 export default class App extends Component {
     componentDidMount(){
         SplashScreen.hide()

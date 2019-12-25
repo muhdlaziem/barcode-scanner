@@ -5,7 +5,7 @@ import CustomAlert from './Component/CustomAlert';
 import SplashScreen from 'react-native-splash-screen';
 
 import {app} from '../CRUD/fbconfig'
-
+export let CurrentUser = null;
 export default class App extends Component {
 
   //Change Header 
@@ -21,8 +21,8 @@ export default class App extends Component {
     super(props);
     this.onPressAlertNegativeButton = this.onPressAlertNegativeButton.bind(this);
     this.state = {
-      email: "",
-      password: "",
+      email: null,
+      password: null,
       condInval: false, //Alert for invalid
       status: true, //status either error or successful sign up
     };
@@ -34,25 +34,27 @@ export default class App extends Component {
       );
       }
   
-   Login = () => {
-    try {
-     if(this.state.email && this.state.password){
-      app
-         .auth()
-         .signInWithEmailAndPassword(this.state.email, this.state.password)
-         .then(() => {
-          this.props.navigation.navigate('Home'); //Successfully Login
-          })
-         .catch(error => {
-           this.setState({condInval: true},);
-          });
-     } else {
-        this.setState({condInval: true},);
-     }
-      } catch (error) {
-        console.log(error.toString(error));
+  Login = () => {
+    console.log(this.state.email,this.state.password)
+  try {
+    if(this.state.email && this.state.password){
+    firebase
+        .auth()
+        .signInWithEmailAndPassword(this.state.email, this.state.password)
+        .then(() => {
+        this.props.navigation.navigate('Home'); //Successfully Login
+        CurrentUser = this.state.email
+        })
+        .catch(error => {
+          this.setState({condInval: true},);
+        });
+    } else {
+      this.setState({condInval: true},);
     }
-  };
+    } catch (error) {
+      console.log(error.toString(error));
+  }
+};
 
   render(){
     return(
@@ -88,7 +90,7 @@ export default class App extends Component {
         
         */}
        <Button color="#65a171"
-       onPress={() => this.props.navigation.navigate('Home')}
+       onPress={this.Login}
        title='LOG IN'/>
       </View>
 
