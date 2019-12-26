@@ -16,6 +16,7 @@ import CustomAlert from '../Login/Component/CustomAlert';
 import {CurrentUser} from '../Login/Login'
 import {changePassword} from '../CRUD/CRUD';
 import * as firebase from "firebase";
+import {Icon} from 'react-native-elements'; 
 
 
 export default class Profile extends Component {
@@ -148,10 +149,9 @@ export default class Profile extends Component {
                   </TouchableOpacity>
                   </View>
                   </View>
-                  <TouchableOpacity style={{alignItems: 'center', marginTop: 80}}
+                  <TouchableOpacity style={{alignItems: 'center', marginTop: 80,width:'40%',alignSelf:'center'}}
                     onPressIn ={this.SignOut}
                     onPress={()=> {this.props.navigation.navigate('Login')}}>
-                      
                     <Text style={{color:'#239b56', fontWeight:'bold', letterSpacing: 1}}>SIGN OUT</Text>
                   </TouchableOpacity>
 

@@ -48,7 +48,7 @@ const BottomTabMaterial = createMaterialBottomTabNavigator(
     shifting: false,
     initialRouteName: 'Scanner',
     //labeled: false,
-    activeColor: '#83CF8E',
+    activeColor: '#239b56',
     inactiveColor: '#828792',
     barStyle: {
       backgroundColor: '#f8f7f9',
