@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    backgroundColor: '#2ecc71',
+    backgroundColor: '#239b56',
     padding: 10,
     marginHorizontal: 3,
     marginTop:16,
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
   },
   button2: {
     alignItems: 'center',
-    backgroundColor: '#2ecc71',
+    backgroundColor: '#239b56',
     padding: 10,
     marginHorizontal: 3,
     marginTop:16,
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
   },
   button3: {
     alignItems: 'center',
-    backgroundColor: '#2ecc71',
+    backgroundColor: '#239b56',
     padding: 10,
     width:200,
     marginTop:16

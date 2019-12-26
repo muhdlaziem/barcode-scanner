@@ -10,6 +10,8 @@ import {
     ScrollView,
     Alert
 } from "react-native";
+
+import CustomAlert from '../Login/Component/CustomAlert';
 // import { TouchableOpacity } from "react-native-gesture-handler";
 import {CurrentUser} from '../Login/Login'
 import {changePassword} from '../CRUD/CRUD';
@@ -23,10 +25,23 @@ export default class Profile extends Component {
       currentPass: null,
       newPass: null,
       hidden1: true,
-      hidden2: true
+      hidden2: true,
+      condNothing: false, //Nothing to Update
+      condCurrent: false, //Need Current Password
+      
     }
   }
 
+  onPressAlertNegativeButton = () => {
+    this.setState({condNothing: false ,}
+        
+      );
+      }
+  onPressExistingUserButton = () => {
+    this.setState({condCurrent: false ,}
+            
+      );
+      }
 
   onInputLabelPressedCurr = () => {
     this.setState({ hidden1: !this.state.hidden1 });
@@ -43,23 +58,11 @@ export default class Profile extends Component {
         changePassword(this.state.currentPass,this.state.newPass);
       }
       else{
-        Alert.alert(
-          'Alert',
-          'Nothing to update!',
-          [
-            {text:'OK',style:'cancel'}
-          ]
-        )
-      }
+        this.setState({condNothing:true});
+      } 
     }
     else{
-      Alert.alert(
-        'Alert',
-        'Require current password to update!',
-        [
-          {text:'OK',style:'cancel'}
-        ]
-      )
+      this.setState({condCurrent: true});
     }
   }
 
@@ -77,6 +80,9 @@ export default class Profile extends Component {
         });
   }
   
+  gotoLoginScreen = () => {
+    this.props.navigation.navigate('Login')
+  }
     render() {
         return(
             
@@ -145,8 +151,32 @@ export default class Profile extends Component {
                   <TouchableOpacity style={{alignItems: 'center', marginTop: 110}}
                     onPressIn ={this.SignOut}
                     onPress={()=> {this.props.navigation.navigate('Login')}}>
+                      
                     <Text style={{color:'#239b56', fontWeight:'bold', letterSpacing: 1}}>SIGN OUT</Text>
                   </TouchableOpacity>
+
+                  {/* If user key in wrong username or password */}
+                  <CustomAlert
+                    displayAlert={this.state.condNothing}
+                    //displayAlertIcon={true} //untuk show icon
+                    alertTitleText={' '}
+                    alertMessageText={'Nothing to Update'}
+                    displayPositiveButton={true}
+                    positiveButtonText={'OK'}
+                    onPressPositiveButton={this.onPressAlertNegativeButton}
+                  />
+
+                  {/* If user key in existing username or password */}
+                  <CustomAlert
+                    displayAlert={this.state.condCurrent}
+                    //displayAlertIcon={true} //untuk show icon
+                    alertTitleText={' '}
+                    alertMessageText={'Require current password to update!'}
+                    displayPositiveButton={true}
+                    positiveButtonText={'OK'}
+                    onPressPositiveButton={this.onPressExistingUserButton}
+                  />
+
                 </View>
                 </ScrollView>
            </View>

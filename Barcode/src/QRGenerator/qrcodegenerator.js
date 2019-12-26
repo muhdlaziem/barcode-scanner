@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         paddingTop: 8,
         marginTop: 10,
         paddingBottom: 8,
-        backgroundColor: '#2ecc71',
+        backgroundColor: '#239b56',
         marginBottom: 20,
       },
       TextStyle: {

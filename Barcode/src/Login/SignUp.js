@@ -102,7 +102,7 @@ export default class SignUp extends Component {
       </View>
 
       <View style = {styles.buttonContainer}>
-      <Button color="#65a171"
+      <Button color="#239b56"
        onPress={this.SignUp}
        title='SIGN UP'/>
       </View>
