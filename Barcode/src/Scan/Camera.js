@@ -150,8 +150,8 @@ export default class App extends Component {
               <TouchableOpacity
               onPress={() => this.onOpneScanner()}
               style={styles.button3}>
-                <Text style={{ color: '#FFFFFF', fontSize: 12 }}>
-                Open QR Scanner
+                <Text style={{ color: '#FFFFFF', fontSize: 14 ,fontWeight: 'bold'}}>
+                OPEN QR SCANNER
                 </Text>
             </TouchableOpacity>
             </View></View>
@@ -221,6 +221,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 3,
     marginTop:16,
     width: 100,
+    borderRadius: 3,
   },
   button2: {
     alignItems: 'center',
@@ -229,13 +230,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 3,
     marginTop:16,
     width: 100,
+    borderRadius: 3,
   },
   button3: {
     alignItems: 'center',
     backgroundColor: '#239b56',
     padding: 10,
     width:200,
-    marginTop:16
+    marginTop:16,
+    borderRadius: 3,
   },
   heading: { 
     color: 'black', 

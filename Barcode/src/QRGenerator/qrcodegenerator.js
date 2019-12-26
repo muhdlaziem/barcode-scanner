@@ -82,7 +82,7 @@ class qrcodegenerator extends Component {
                     onLongPress={this.shareQR}
                     activeOpacity={0.7}
                     style={styles.button}>
-                    <Text style={styles.TextStyle}>Generate QR Code</Text>
+                    <Text style={styles.TextStyle}>GENERATE QR CODE</Text>
                 </TouchableOpacity></View>
             </View>
         );
@@ -120,16 +120,18 @@ const styles = StyleSheet.create({
         textAlign: 'center',
       },
       button: {
-        width: '100%',
-        paddingTop: 8,
-        marginTop: 10,
-        paddingBottom: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 25,
         backgroundColor: '#239b56',
-        marginBottom: 20,
+        padding: 7,
+        width: '65%',
+        borderRadius: 3
       },
       TextStyle: {
         color: '#fff',
         textAlign: 'center',
-        fontSize: 18,
+        fontSize: 14,
+        fontWeight:'bold',
       }
   });
