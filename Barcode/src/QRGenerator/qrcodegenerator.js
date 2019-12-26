@@ -5,11 +5,13 @@ import {
     StyleSheet,
     TextInput,
     TouchableOpacity,
-    StatusBar
+    StatusBar,
+    Alert
 } from "react-native";
 
 import QRCode from 'react-native-qrcode-svg';
-
+import fetch_blob from 'react-native-fetch-blob';
+import RNFS from 'react-native-fs';
 class qrcodegenerator extends Component {
     svg;
     constructor(){
@@ -17,25 +19,54 @@ class qrcodegenerator extends Component {
         this.state = {
             inputValue:'',
             valueForQRCode:'',
+            Files:null,
+            name :"MyQRCODE.png"
         }
 
     }
-    getTextInputValue = () =>{
-        this.setState({valueForQRCode:this.state.inputValue})
-        console.log(this.state.valueForQRCode)
-        this.getDataURL
-    }
+   
     
     shareQR=() =>{
-        this.svg.toDataURL((data) => {
-          const shareImageBase64 = {
-            title: "QR",
-            message: "Ehi, this is my QR code",
-            url: `data:image/png;base64,${data}`
-          };
-          console.log(shareImageBase64)
-        //   Share.open(shareImageBase64);
+        const fs = fetch_blob.fs
+        const dirs = fs.dirs 
+        // let name = "MyQRCODE.png"
+        RNFS.readDir(dirs.DCIMDir)
+        .then((result) => {
+            let data = [];
+            result.map(y=>{
+                data.push(y.name)
+            })
+            this.setState({Files:data})
+            console.log(this.state.Files.includes(this.statename))
+            let incr=0
+            while(this.state.Files.includes(this.state.name)){
+                incr = incr+1;
+                this.setState({name:'MyQRCODE' + incr + '.png'})
+                // console.log(name)
+            }
+        })
+        .then(()=>{
+            let file_path = dirs.DCIMDir + '/'+this.state.name
+            console.log(file_path)
+
+            this.svg.toDataURL((data) => {
+                let shareImageBase64 = data
+                
+            RNFS.writeFile(file_path, shareImageBase64, 'base64')
+            .then(()=>{
+                Alert.alert('Image Saved in Gallery')
+                console.log('Image Saved in Gallery')})
+            .catch((error) => {
+                alert(JSON.stringify(error));
+            });
+            });
+        })
+        .catch((err) => {
+        console.log(err.message, err.code);
         });
+
+        
+        
     }
 
     render() {
@@ -73,17 +104,18 @@ class qrcodegenerator extends Component {
                 <TextInput
                     // Input to get the value to set on QRCode
                     style={styles.TextInputStyle}
-                    onChangeText={text => this.setState({ inputValue: text })}
+                    onChangeText={text => this.setState({ valueForQRCode: text })}
                     underlineColorAndroid="transparent"
                     placeholder="Enter Your Website"
                 />
+                
                 <TouchableOpacity
-                    onPress={this.getTextInputValue}
-                    onLongPress={this.shareQR}
+                    onPress={this.shareQR}
                     activeOpacity={0.7}
                     style={styles.button}>
-                    <Text style={styles.TextStyle}>GENERATE QR CODE</Text>
-                </TouchableOpacity></View>
+                    <Text style={styles.TextStyle}>SAVE QR CODE</Text>
+                </TouchableOpacity>
+                </View>
             </View>
         );
     }

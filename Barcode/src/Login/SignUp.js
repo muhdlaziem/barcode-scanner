@@ -23,11 +23,14 @@ export default class SignUp extends Component {
         condInval: false, //Alert for invalid
         condInvalExist: false, //Alert for invalid
         status: true, //status either error or successful sign up
-        error:null
+        error:null,
+        hide: true
       };
     }
-    
 
+    onInputLabelPressed = () => {
+      this.setState({ hide: !this.state.hide });
+    };
  
     onPressAlertPositiveButton = () => {
       this.setState({condSucc: false ,},
@@ -90,21 +93,29 @@ export default class SignUp extends Component {
         autoCorrect={false}
         onChangeText={email => this.setState({ email })}
       />
-
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
       <TextInput
         placeholder='Password'
         style={styles.input}
-        secureTextEntry={true}
+        secureTextEntry={this.state.hide}
         autoCapitalize="none"
         autoCorrect={false}
         onChangeText={password => this.setState({ password })}
       />
+      <TouchableOpacity onPress={this.onInputLabelPressed} style={{marginLeft:-40}}>
+            <Text style={{textAlign:'right', fontSize:12, color: '#909497'}}>
+              {this.state.hide ? 'Show' : 'Hide'}
+            </Text>
+          </TouchableOpacity>
+      </View>
       </View>
 
       <View style = {styles.buttonContainer}>
-      <Button color="#239b56"
-       onPress={this.SignUp}
-       title='SIGN UP'/>
+      <TouchableOpacity onPress={this.SignUp}
+       style={{backgroundColor:'#239b56', padding:10, alignItems: 'center',borderRadius:3}}
+       >
+         <Text style={{color:'white', fontWeight: 'bold',}}>SIGN UP</Text>
+       </TouchableOpacity>
       </View>
       
       {/* sucessfuly sign up username or password */}

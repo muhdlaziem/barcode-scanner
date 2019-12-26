@@ -148,7 +148,7 @@ export default class Profile extends Component {
                   </TouchableOpacity>
                   </View>
                   </View>
-                  <TouchableOpacity style={{alignItems: 'center', marginTop: 110}}
+                  <TouchableOpacity style={{alignItems: 'center', marginTop: 80}}
                     onPressIn ={this.SignOut}
                     onPress={()=> {this.props.navigation.navigate('Login')}}>
                       

@@ -25,9 +25,12 @@ export default class App extends Component {
       password: null,
       condInval: false, //Alert for invalid
       status: true, //status either error or successful sign up
+      hide: true
     };
   }
-  
+  onInputLabelPressed = () => {
+    this.setState({ hide: !this.state.hide });
+  };
 
   onPressAlertNegativeButton = () => {
     this.setState({condInval: false ,},
@@ -68,22 +71,29 @@ export default class App extends Component {
              style={{width: 100, height: 100, margin: 25}} />
       <Text style={styles.textTitle}>Login</Text>
       <View style = {styles.inputContainer}>
-      <TextInput
-        placeholder='Email'
-        style={styles.input}
-        autoCapitalize="none"
-        autoCorrect={false}
-        onChangeText={email => this.setState({ email })}
-      />
+        <TextInput
+          placeholder='Email'
+          style={styles.input}
+          autoCapitalize="none"
+          autoCorrect={false}
+          onChangeText={email => this.setState({ email })}
+        />
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
 
-      <TextInput
-        placeholder='Password'
-        style={styles.input}
-        secureTextEntry={true}
-        autoCapitalize="none"
-        autoCorrect={false}
-        onChangeText={password => this.setState({ password })}
-      />
+          <TextInput
+            placeholder='Password'
+            style={styles.input}
+            secureTextEntry={this.state.hide}
+            autoCapitalize="none"
+            autoCorrect={false}
+            onChangeText={password => this.setState({ password })}
+          />
+          <TouchableOpacity onPress={this.onInputLabelPressed} style={{marginLeft:-40}}>
+            <Text style={{textAlign:'right', fontSize:12, color: '#909497'}}>
+              {this.state.hide ? 'Show' : 'Hide'}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
       <View style = {styles.buttonContainer}>
@@ -93,9 +103,16 @@ export default class App extends Component {
        title='LOG IN'/>
         
         */}
-       <Button color="#239b56"
-       onPress={this.Login}
-       title='LOG IN'/>
+       <TouchableOpacity onPress={this.Login}
+       style={{backgroundColor:'#239b56', padding:10, alignItems: 'center',borderRadius:3,marginBottom: 5}}
+       >
+         <Text style={{color:'white', fontWeight: 'bold',}}>LOG IN</Text>
+       </TouchableOpacity>
+       <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}
+       style={{backgroundColor:'#239b56', padding:10, alignItems: 'center',borderRadius:3,}}
+       >
+         <Text style={{color:'white', fontWeight: 'bold',}}>LOG IN AS GUEST</Text>
+       </TouchableOpacity>
       </View>
 
 
@@ -109,7 +126,9 @@ export default class App extends Component {
           positiveButtonText={'OK'}
           onPressPositiveButton={this.onPressAlertNegativeButton}
         />
-
+      {/* <TouchableOpacity style={styles.TouchAble}>
+        <Text style={styles.textGuest}> Log in As Guest</Text>
+      </TouchableOpacity> */}
       <TouchableOpacity style={styles.TouchAble} onPress={() => this.props.navigation.navigate('SignUp')} >
         <Text style={styles.textGuest}> Sign Up Here </Text>
       </TouchableOpacity>
