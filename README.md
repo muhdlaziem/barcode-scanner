@@ -96,7 +96,7 @@ Functionalities
         
     5. QR Generator Page
     
-    ![QR Generator Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/Generator.jpg)
+    ![QR Generator Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/Generate.jpg)
     
     This is the QR Generator Page. User will fill with any link that they desired in the text field ,click the Generate QR Code button and an image of the QR will be generated.
     
