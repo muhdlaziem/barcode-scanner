@@ -12,7 +12,7 @@ import {Text,
         Image,
         StatusBar,
         BackHandler,
-      Alert} from 'react-native';
+        Alert} from 'react-native';
 // import all basic components
 import SplashScreen from 'react-native-splash-screen';
 import { CameraKitCameraScreen, } from 'react-native-camera-kit';
@@ -46,9 +46,7 @@ export default class App extends Component {
   }
 
   handleBackButtonClick() {
-    this.props.navigation.goBack(null);
-    console.log(this.props.navigation.state.routeName)
-    if(!this.state.opneScanner && this.props.navigation.state.routeName==='Scanner'){
+      // this.props.navigation.goBack(null);
       Alert.alert(
         'Exit App',
         'Exiting the application?', [{
@@ -62,9 +60,7 @@ export default class App extends Component {
             cancelable: false
         }
      )
-    }
-    
-      this.setState({opneScanner:false,isLink:false})
+      // this.setState({opneScanner:false,isLink:false})
 
       return true;
   }
