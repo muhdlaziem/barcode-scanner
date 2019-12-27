@@ -6,23 +6,25 @@ import {
     TouchableOpacity,
     StatusBar,
     Linking,
-    Alert,Button
+    Alert,Image
 } from "react-native";
 import SplashScreen from 'react-native-splash-screen';
 import {app} from '../CRUD/fbconfig';
 import {deleteLink} from '../CRUD/CRUD'
 import { Colors } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
-import {ListItem} from 'react-native-elements';
+import {ListItem,Icon} from 'react-native-elements';
 import * as firebase from "firebase";
 import {CurrentUser} from '../Login/Login'
+import Clipboard from "@react-native-community/react-native-clipboard";
+
 
 export default class view extends Component {
     constructor(props){
         super(props);
         this.state = {
             content:[],
-            isModalVisible:false
+            clipboardContent:null
         }
     }
     componentDidMount(){
@@ -52,6 +54,15 @@ export default class view extends Component {
         }
         
     }
+    writeToClipboard = async () => {
+      Clipboard.setString(this.state.clipboardContent)
+         alert('Copied to clipboard')
+    }
+    setClipContent = (id)=>{
+      this.setState({clipboardContent:id},this.writeToClipboard)
+      
+    }
+  
     onOpenlink(link){
 
       if(link.includes('http')){
@@ -109,7 +120,15 @@ export default class view extends Component {
               title={y.Link}
               onPress = {()=>this.onOpenlink(y.Link)}
               onLongPress={() => {this.deleteConfirmation(y.key)}}
-              bottomDivider/>
+              rightTitle={<TouchableOpacity
+                onPress={()=>{this.setClipContent(y.Link)}}>
+                  <Image source={require('./images/copypaste.png')}
+                style={{width: 40, height: 40}}/>
+                </TouchableOpacity>}
+              bottomDivider
+              >
+                <Icon ></Icon>
+              </ListItem>
             );
           })}
         </ScrollView>
@@ -136,4 +155,13 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: '#239b56',
     },
+    button2: {
+      alignItems: 'center',
+      backgroundColor: '#239b56',
+      padding: 10,
+      marginHorizontal: 3,
+      marginTop:16,
+      width: 100,
+      borderRadius: 3,
+    }
   });

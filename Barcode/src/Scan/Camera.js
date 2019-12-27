@@ -16,6 +16,7 @@ import {Text,
 import SplashScreen from 'react-native-splash-screen';
 import { CameraKitCameraScreen, } from 'react-native-camera-kit';
 import {addLink} from '../CRUD/CRUD';
+import Clipboard from "@react-native-community/react-native-clipboard";
 //import CameraKitCameraScreen we are going to use.
 
 // import {CurrentUser} from '../Login/Login';
@@ -48,6 +49,10 @@ export default class App extends Component {
       this.setState({opneScanner:false,isLink:false})
 
       return true;
+  }
+  writeToClipboard = async () => {
+    Clipboard.setString(this.state.qrvalue)
+       alert('Copied to clipboard')
   }
 
   onOpenlink=()=> {
@@ -123,27 +128,37 @@ export default class App extends Component {
             <Text style={styles.simpleText}>{this.state.qrvalue ? 'Result: '+this.state.qrvalue : ''}</Text>
             
             <View style={{flexDirection: "row"}}>
-            { 
-            this.state.isLink ?
+              { 
+              this.state.isLink ?
 
-              <TouchableOpacity
-                onPress={() => this.onOpenlink()}
-                style={styles.button}>
-                  <Text style={{ color: '#FFFFFF', fontSize: 12 ,fontWeight:'bold'}}>OPEN LINK</Text>
-              </TouchableOpacity>
-              : null
-            }
-            
-            {this.state.qrvalue ?
+                <TouchableOpacity
+                  onPress={() => this.onOpenlink()}
+                  style={styles.button}>
+                    <Text style={{ color: '#FFFFFF', fontSize: 12 ,fontWeight:'bold'}}>OPEN LINK</Text>
+                </TouchableOpacity>
+                : null
+              }
+              
+              {this.state.qrvalue ?
 
-            <TouchableOpacity
-            onPress={() => addLink(this.state.qrvalue)}
-            style={styles.button2}>
-              <Text style={{ color: '#FFFFFF', fontSize: 12,fontWeight:'bold'}}>SAVE</Text>
-            </TouchableOpacity>
-              : null
-            }
-              </View>
+                <TouchableOpacity
+                onPress={() => addLink(this.state.qrvalue)}
+                style={styles.button2}>
+                  <Text style={{ color: '#FFFFFF', fontSize: 12,fontWeight:'bold'}}>SAVE</Text>
+                </TouchableOpacity>
+                  : null
+              }
+              {this.state.qrvalue ?
+
+                <TouchableOpacity
+                onPress={this.writeToClipboard}
+                style={styles.button2}>
+                  <Text style={{ color: '#FFFFFF', fontSize: 12,fontWeight:'bold'}}>COPY</Text>
+                </TouchableOpacity>
+                  : null
+              }
+              
+            </View>
               <TouchableOpacity
               onPress={() => this.onOpneScanner()}
               style={styles.button3}>
