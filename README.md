@@ -63,7 +63,7 @@ Functionalities
     
      ![Login Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/Login.jpg)
     
-    User need to sign in before the Home Page is prompted. If user does not have any account, they need to click to Sign Up button to be redirected to Sign Up page.
+    User can choose either they want to sign in or sign in as guest. If user does not have any account, they need to click to Sign Up button to be redirected to Sign Up page.
     
     **Component used:** 
     + TextInput
