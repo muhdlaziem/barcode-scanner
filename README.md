@@ -85,7 +85,7 @@ Functionalities
 
     4. Scanner Page
     
-    
+    ![Home Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/Scanner.jpg)
     
     This is the Scanner Page or Home Page. If user want to scan any barcode , they just need to click on the Open QR Scanner and the camera page will be prompt.
     
@@ -108,7 +108,8 @@ Functionalities
 
     6. History List
     
-    
+    ![History Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/List.jpg)
+
     
     This is the History List Page. Every link that was scanned by the user will be saved in the history list. User can delete any link by holding the link and a popup message will pop.
     
@@ -118,7 +119,7 @@ Functionalities
         
     7.Profile
     
-    
+    ![Profile Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/Profile.jpg)
     ![Guest Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/Guest.jpg)
     
     If user sign in as guest , the guest page will be prompt and if the user sign in, the profile will be prompt.
