@@ -60,7 +60,7 @@ export default class SignUp extends Component {
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then(user => { 
                    console.log(user);
-                   addEmail(this.state.email);
+                   console.log('Sign Up Succes')
                    this.setState({condSucc: true},); //Successfully sign up
              })
             .catch(error => {

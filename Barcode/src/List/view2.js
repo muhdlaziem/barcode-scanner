@@ -31,6 +31,7 @@ export default class view extends Component {
     }
     componentDidMount(){
         SplashScreen.hide()
+        console.log(deviceID)
         let currentUser;
         if(!firebase.auth().currentUser){
           currentUser = deviceID;
@@ -96,21 +97,22 @@ export default class view extends Component {
     }
     
     render() {
-    //   if(!firebase.auth().currentUser){
-    //     return(
+      console.log(this.state.content)
+      if(!this.state.content.length){
+        return(
             
-    //         <View style={styles.screen}>
-    //           <StatusBar backgroundColor="#239b56" barStyle="light-content"/>
-    //             <View style={styles.title}>
-    //               <Text style={{color:'white', fontWeight: 'bold'}}>Barcode History</Text>
-    //             </View>
-    //             <View style={styles.container}> 
-    //             <Text style={{ fontSize: 22, color:'#bdc3c7',}}>Login to Save History</Text>
-    //             </View>
-    //        </View>
+            <View style={styles.screen}>
+              <StatusBar backgroundColor="#239b56" barStyle="light-content"/>
+                <View style={styles.title}>
+                  <Text style={{color:'white', fontWeight: 'bold'}}>Barcode History</Text>
+                </View>
+                <View style={styles.container}> 
+                <Text style={{ fontSize: 22, color:'#bdc3c7',}}>You Saved Nothing</Text>
+                </View>
+           </View>
            
-    //     )
-    // }
+        )
+    }
     return(
             
       <View>
