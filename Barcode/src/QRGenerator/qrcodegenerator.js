@@ -6,66 +6,112 @@ import {
     TextInput,
     TouchableOpacity,
     StatusBar,
-    Alert
+    Alert,
+    Platform,
+    PermissionsAndroid
 } from "react-native";
 
 import QRCode from 'react-native-qrcode-svg';
 import fetch_blob from 'react-native-fetch-blob';
 import RNFS from 'react-native-fs';
+import { ThemeConsumer } from "react-native-elements";
 class qrcodegenerator extends Component {
     svg;
     constructor(){
         super();
         this.state = {
             inputValue:'',
-            valueForQRCode:'',
+            valueForQRCode:null,
             Files:null,
-            name :"MyQRCODE.png"
+            name :"MyQRCODE.png",
+            granted:null
         }
 
     }
    
-    
-    shareQR=() =>{
-        const fs = fetch_blob.fs
-        const dirs = fs.dirs 
-        // let name = "MyQRCODE.png"
-        RNFS.readDir(dirs.DCIMDir)
-        .then((result) => {
-            let data = [];
-            result.map(y=>{
-                data.push(y.name)
+    contShareQR =()=>{
+        if(!this.state.valueForQRCode && this.state.granted==='granted'){
+            Alert.alert(
+                'Alert',
+                'Nothing to Save!')
+        }
+        else{
+            const fs = fetch_blob.fs
+            const dirs = fs.dirs 
+            // let name = "MyQRCODE.png"
+            RNFS.readDir(dirs.DCIMDir)
+            .then((result) => {
+                let data = [];
+                result.map(y=>{
+                    data.push(y.name)
+                })
+                this.setState({Files:data})
+                console.log(this.state.Files.includes(this.statename))
+                let incr=0
+                while(this.state.Files.includes(this.state.name)){
+                    incr = incr+1;
+                    this.setState({name:'MyQRCODE' + incr + '.png'})
+                    // console.log(name)
+                }
             })
-            this.setState({Files:data})
-            console.log(this.state.Files.includes(this.statename))
-            let incr=0
-            while(this.state.Files.includes(this.state.name)){
-                incr = incr+1;
-                this.setState({name:'MyQRCODE' + incr + '.png'})
-                // console.log(name)
-            }
-        })
-        .then(()=>{
-            let file_path = dirs.DCIMDir + '/'+this.state.name
-            console.log(file_path)
-
-            this.svg.toDataURL((data) => {
-                let shareImageBase64 = data
-                
-            RNFS.writeFile(file_path, shareImageBase64, 'base64')
             .then(()=>{
-                Alert.alert('Image Saved in Gallery')
-                console.log('Image Saved in Gallery')})
-            .catch((error) => {
-                alert(JSON.stringify(error));
-            });
-            });
-        })
-        .catch((err) => {
-        console.log(err.message, err.code);
-        });
+                let file_path = dirs.DCIMDir + '/'+this.state.name
+                console.log(file_path)
 
+                this.svg.toDataURL((data) => {
+                    let shareImageBase64 = data
+                    
+                RNFS.writeFile(file_path, shareImageBase64, 'base64')
+                .then(()=>{
+                    Alert.alert(
+                        'Image Saved in Gallery',
+                        `Saved in ${file_path}`)
+                    console.log('Image Saved in Gallery')})
+                .catch((error) => {
+                    alert(JSON.stringify(error));
+                });
+                });
+            })
+            .catch((err) => {
+            console.log(err.message, err.code);
+            });
+            this.textInput.clear()
+            this.setState({valueForQRCode:null})
+        }
         
+    }
+    shareQR=() =>{
+        let that=this;
+        if(Platform.OS === 'android'){
+            async function reqeustStoragePermission(){
+                try{
+                    const granted = await PermissionsAndroid.requestMultiple(
+                        [PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+                        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
+                        ]
+                    )
+                    
+                    if (granted['android.permission.READ_EXTERNAL_STORAGE']===PermissionsAndroid.RESULTS.GRANTED) {
+                        that.setState({granted:'granted'})
+                        //If CAMERA Permission is granted
+                        console.log(granted)
+                        console.log(PermissionsAndroid.RESULTS.GRANTED)
+                        that.contShareQR()
+                    } else {
+                        Alert.alert("Storage permission denied");
+                    }
+                }
+                catch(err){
+                    Alert.alert("Storage permssion err",err)
+                    console.warn(err);
+                }
+            }
+            reqeustStoragePermission();
+        }
+        else{
+            that.contShareQR()
+
+        }
         
     }
 
@@ -78,6 +124,7 @@ class qrcodegenerator extends Component {
                  </View>
                  <View style={styles.MainContainer}>
                  <QRCode
+                    
                     //QR code value
                     value={this.state.valueForQRCode ? this.state.valueForQRCode:'NA'}
                     //size of QR Code
@@ -103,6 +150,7 @@ class qrcodegenerator extends Component {
                 />
                 <TextInput
                     // Input to get the value to set on QRCode
+                    ref={input =>{this.textInput =input}}
                     style={styles.TextInputStyle}
                     onChangeText={text => this.setState({ valueForQRCode: text })}
                     underlineColorAndroid="transparent"

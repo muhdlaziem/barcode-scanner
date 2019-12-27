@@ -85,17 +85,14 @@ export default class App extends Component {
       async function requestCameraPermission() {
         try {
           const granted = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.CAMERA,{
-              'title': 'CameraExample App Camera Permission',
-              'message': 'CameraExample App needs access to your camera '
-            }
+            PermissionsAndroid.PERMISSIONS.CAMERA
           )
           if (granted === PermissionsAndroid.RESULTS.GRANTED) {
             //If CAMERA Permission is granted
             that.setState({ qrvalue: '' });
             that.setState({ opneScanner: true });
           } else {
-            alert("CAMERA permission denied");
+            alert("Camera permission denied");
           }
         } catch (err) {
           alert("Camera permission err",err);
@@ -132,7 +129,7 @@ export default class App extends Component {
               <TouchableOpacity
                 onPress={() => this.onOpenlink()}
                 style={styles.button}>
-                  <Text style={{ color: '#FFFFFF', fontSize: 12 }}>Open Link</Text>
+                  <Text style={{ color: '#FFFFFF', fontSize: 12 ,fontWeight:'bold'}}>OPEN LINK</Text>
               </TouchableOpacity>
               : null
             }
@@ -142,7 +139,7 @@ export default class App extends Component {
             <TouchableOpacity
             onPress={() => addLink(this.state.qrvalue)}
             style={styles.button2}>
-              <Text style={{ color: '#FFFFFF', fontSize: 12}}>Save</Text>
+              <Text style={{ color: '#FFFFFF', fontSize: 12,fontWeight:'bold'}}>SAVE</Text>
             </TouchableOpacity>
               : null
             }

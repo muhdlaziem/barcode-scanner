@@ -5,11 +5,17 @@ import { Alert } from 'react-native';
 
 
 export const addLink = (qrvalue)=>{
-    let newPostKey = app.database().ref().child('item').push().key;
-    let updates = {};
-    updates['/item/' + newPostKey] = {Link:qrvalue,User:CurrentUser}
-    app.database().ref().update(updates);
-    console.log(updates)
+    if(!firebase.auth().currentUser){
+        Alert.alert('Login to Save')
+    }
+    else{
+        let newPostKey = app.database().ref().child('item').push().key;
+        let updates = {};
+        updates['/item/' + newPostKey] = {Link:qrvalue,User:firebase.auth().currentUser.email}
+        app.database().ref().update(updates);
+        console.log(updates)
+    }
+    
 }
 
 export const deleteLink = (id) =>{

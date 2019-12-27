@@ -58,7 +58,7 @@ export default class App extends Component {
     } catch (error) {
       console.log(error.toString(error));
   }
-};
+  };
 
 
 
@@ -108,6 +108,7 @@ export default class App extends Component {
        >
          <Text style={{color:'white', fontWeight: 'bold',}}>LOG IN</Text>
        </TouchableOpacity>
+       
        <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}
        style={{backgroundColor:'#239b56', padding:10, alignItems: 'center',borderRadius:3,}}
        >

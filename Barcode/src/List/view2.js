@@ -27,7 +27,8 @@ export default class view extends Component {
     }
     componentDidMount(){
         SplashScreen.hide()
-        app.database().ref('item/').on('value', snapshot => {
+        if(firebase.auth().currentUser){
+          app.database().ref('item/').on('value', snapshot => {
             console.log(snapshot.val())
             let data = [];
             snapshot.forEach(child =>{
@@ -48,6 +49,8 @@ export default class view extends Component {
             // console.log(`Data: ${snapshot.val().key.Link}`)
             console.log((this.state.content))
         });
+        }
+        
     }
     onOpenlink(link){
 
@@ -75,58 +78,62 @@ export default class view extends Component {
     }
     
     render() {
+      if(!firebase.auth().currentUser){
         return(
             
-            <View>
+            <View style={styles.screen}>
               <StatusBar backgroundColor="#239b56" barStyle="light-content"/>
-              <ScrollView>
                 <View style={styles.title}>
                   <Text style={{color:'white', fontWeight: 'bold'}}>Barcode History</Text>
                 </View>
-                {this.state.content.map((y,index)=>{
-                  // this.setState({Link: y.Link})
-                  return(
-                    <ListItem
-                    key={index}
-                    title={y.Link}
-                    onPress = {()=>this.onOpenlink(y.Link)}
-                    onLongPress={() => {this.deleteConfirmation(y.key)}}
-                    bottomDivider/>
-                  );
-                })}
-              </ScrollView>
+                <View style={styles.container}> 
+                <Text style={{ fontSize: 22, color:'#bdc3c7',}}>Login to Save History</Text>
+                </View>
            </View>
            
         )
+    }
+    return(
+            
+      <View>
+        <StatusBar backgroundColor="#239b56" barStyle="light-content"/>
+        <ScrollView>
+          <View style={styles.title}>
+            <Text style={{color:'white', fontWeight: 'bold'}}>Barcode History</Text>
+          </View>
+          {this.state.content.map((y,index)=>{
+            // this.setState({Link: y.Link})
+            return(
+              <ListItem
+              key={index}
+              title={y.Link}
+              onPress = {()=>this.onOpenlink(y.Link)}
+              onLongPress={() => {this.deleteConfirmation(y.key)}}
+              bottomDivider/>
+            );
+          })}
+        </ScrollView>
+     </View>
+     
+  )
     }
 }
 
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      backgroundColor: '#ebebeb'
-    },
+  screen: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor:'white'
+  },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
     title: {
         alignItems: 'center',
         padding: 10,
         backgroundColor: '#239b56',
     },
-    listItem: {
-        padding: 20,
-        borderBottomWidth: 1,
-        borderBottomColor: '#bdc3c7',
-        // backgroundColor: '#2ecc71',
-        // marginTop: 10,
-        // marginHorizontal: 50
-    },
-    listItem2: {
-      padding: 20,
-      justifyContent: 'center',
-      alignItems: 'center'
-      // backgroundColor: '#2ecc71',
-      // marginTop: 10,
-      // marginHorizontal: 50
-  }
   });
