@@ -63,7 +63,7 @@ Functionalities
     
      ![Login Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/Login.jpg)
     
-    User need to sign in before the Home Page is prompted. If user does not have any account, they need to click to Sign Up button to be redirected to Sign Up page.
+    User can choose either they want to sign in or sign in as guest. If user does not have any account, they need to click to Sign Up button to be redirected to Sign Up page.
     
     **Component used:** 
     + TextInput
@@ -85,7 +85,7 @@ Functionalities
 
     4. Scanner Page
     
-    ![Home Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/Home.jpg)
+    ![Home Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/Scanner.jpg)
     
     This is the Scanner Page or Home Page. If user want to scan any barcode , they just need to click on the Open QR Scanner and the camera page will be prompt.
     
@@ -96,7 +96,7 @@ Functionalities
         
     5. QR Generator Page
     
-    ![QR Generator Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/Gene.jpg)
+    ![QR Generator Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/Generator.jpg)
     
     This is the QR Generator Page. User will fill with any link that they desired in the text field ,click the Generate QR Code button and an image of the QR will be generated.
     
@@ -116,6 +116,12 @@ Functionalities
     + Modal
     + Flatlist
         
+    7.Profile
+    
+    ![Profile Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/Profile.jpg)
+    ![Guest Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/Guest.jpg)
+    
+    If user sign in as guest , the guest page will be prompt and if the user sign in, the profile will be prompt.
     _____________________
         
 ### 6.0 Sequence Diagram
