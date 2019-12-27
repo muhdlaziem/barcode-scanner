@@ -11,7 +11,8 @@ import {Text,
         StyleSheet,
         Image,
         StatusBar,
-        BackHandler} from 'react-native';
+        BackHandler,
+      Alert} from 'react-native';
 // import all basic components
 import SplashScreen from 'react-native-splash-screen';
 import { CameraKitCameraScreen, } from 'react-native-camera-kit';
@@ -45,7 +46,24 @@ export default class App extends Component {
   }
 
   handleBackButtonClick() {
-      this.props.navigation.goBack(null);
+    this.props.navigation.goBack(null);
+    console.log(this.props.navigation.state.routeName)
+    if(!this.state.opneScanner && this.props.navigation.state.routeName==='Scanner'){
+      Alert.alert(
+        'Exit App',
+        'Exiting the application?', [{
+            text: 'Cancel',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel'
+        }, {
+            text: 'OK',
+            onPress: () => BackHandler.exitApp()
+        }, ], {
+            cancelable: false
+        }
+     )
+    }
+    
       this.setState({opneScanner:false,isLink:false})
 
       return true;
@@ -111,6 +129,8 @@ export default class App extends Component {
       that.setState({ opneScanner: true });
     }    
   }
+
+  
   render() {
     let displayModal;
     //If qrvalue is set then return this view
@@ -143,6 +163,7 @@ export default class App extends Component {
 
                 <TouchableOpacity
                 onPress={() => addLink(this.state.qrvalue)}
+                
                 style={styles.button2}>
                   <Text style={{ color: '#FFFFFF', fontSize: 12,fontWeight:'bold'}}>SAVE</Text>
                 </TouchableOpacity>

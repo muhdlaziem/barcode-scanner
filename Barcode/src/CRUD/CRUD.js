@@ -1,21 +1,24 @@
 import {app} from './fbconfig';
-import {CurrentUser} from '../Login/Login';
 import * as firebase from "firebase";
 import { Alert } from 'react-native';
+import {getDeviceId}from 'react-native-device-info'
 
-
+let deviceID = getDeviceId()
 export const addLink = (qrvalue)=>{
+    console.log(deviceID)
+    let currentUser;
     if(!firebase.auth().currentUser){
-        Alert.alert('Login to Save')
+        currentUser=deviceID
     }
     else{
-        let newPostKey = app.database().ref().child('item').push().key;
-        let updates = {};
-        updates['/item/' + newPostKey] = {Link:qrvalue,User:firebase.auth().currentUser.email}
-        app.database().ref().update(updates);
-        console.log(updates)
+        currentUser=firebase.auth().currentUser.email
     }
-    
+    let newPostKey = app.database().ref().child('item').push().key;
+    let updates = {};
+    updates['/item/' + newPostKey] = {Link:qrvalue,User:currentUser}
+    app.database().ref().update(updates);
+    console.log(updates)
+
 }
 
 export const deleteLink = (id) =>{

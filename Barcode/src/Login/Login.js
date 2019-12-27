@@ -3,7 +3,6 @@ import {View, Text, TextInput, StyleSheet, Button, Image, StatusBar,TouchableOpa
 import * as firebase from "firebase";
 import CustomAlert from './Component/CustomAlert';
 import SplashScreen from 'react-native-splash-screen';
-
 import {app} from '../CRUD/fbconfig'
 export let CurrentUser = null;
 export default class App extends Component {
@@ -108,7 +107,7 @@ export default class App extends Component {
        >
          <Text style={{color:'white', fontWeight: 'bold',}}>LOG IN</Text>
        </TouchableOpacity>
-       
+
        <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}
        style={{backgroundColor:'#239b56', padding:10, alignItems: 'center',borderRadius:3,}}
        >

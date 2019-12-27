@@ -17,7 +17,9 @@ import {ListItem,Icon} from 'react-native-elements';
 import * as firebase from "firebase";
 import {CurrentUser} from '../Login/Login'
 import Clipboard from "@react-native-community/react-native-clipboard";
+import {getDeviceId}from 'react-native-device-info'
 
+let deviceID = getDeviceId()
 
 export default class view extends Component {
     constructor(props){
@@ -29,29 +31,34 @@ export default class view extends Component {
     }
     componentDidMount(){
         SplashScreen.hide()
-        if(firebase.auth().currentUser){
-          app.database().ref('item/').on('value', snapshot => {
-            console.log(snapshot.val())
-            let data = [];
-            snapshot.forEach(child =>{
-              if(child.val().User===firebase.auth().currentUser.email){
-                data.push({
-                  Link: child.val().Link,
-                  key: child.key,
-                  User: child.val().User
-                });
-              }
-             
-            });
-            this.setState({
-              content:data
-            })
-            // console.log(snapshot.val())
-            // // let data = snapshot.val()
-            // console.log(`Data: ${snapshot.val().key.Link}`)
-            console.log((this.state.content))
-        });
+        let currentUser;
+        if(!firebase.auth().currentUser){
+          currentUser = deviceID;
         }
+        else{
+          currentUser = firebase.auth().currentUser.email;
+        }
+        app.database().ref('item/').on('value', snapshot => {
+          console.log(snapshot.val())
+          let data = [];
+          snapshot.forEach(child =>{
+            if(child.val().User===currentUser){
+              data.push({
+                Link: child.val().Link,
+                key: child.key,
+                User: child.val().User
+              });
+            }
+           
+          });
+          this.setState({
+            content:data
+          })
+          // console.log(snapshot.val())
+          // // let data = snapshot.val()
+          // console.log(`Data: ${snapshot.val().key.Link}`)
+          console.log((this.state.content))
+      });
         
     }
     writeToClipboard = async () => {
@@ -89,21 +96,21 @@ export default class view extends Component {
     }
     
     render() {
-      if(!firebase.auth().currentUser){
-        return(
+    //   if(!firebase.auth().currentUser){
+    //     return(
             
-            <View style={styles.screen}>
-              <StatusBar backgroundColor="#239b56" barStyle="light-content"/>
-                <View style={styles.title}>
-                  <Text style={{color:'white', fontWeight: 'bold'}}>Barcode History</Text>
-                </View>
-                <View style={styles.container}> 
-                <Text style={{ fontSize: 22, color:'#bdc3c7',}}>Login to Save History</Text>
-                </View>
-           </View>
+    //         <View style={styles.screen}>
+    //           <StatusBar backgroundColor="#239b56" barStyle="light-content"/>
+    //             <View style={styles.title}>
+    //               <Text style={{color:'white', fontWeight: 'bold'}}>Barcode History</Text>
+    //             </View>
+    //             <View style={styles.container}> 
+    //             <Text style={{ fontSize: 22, color:'#bdc3c7',}}>Login to Save History</Text>
+    //             </View>
+    //        </View>
            
-        )
-    }
+    //     )
+    // }
     return(
             
       <View>
@@ -122,8 +129,8 @@ export default class view extends Component {
               onLongPress={() => {this.deleteConfirmation(y.key)}}
               rightTitle={<TouchableOpacity
                 onPress={()=>{this.setClipContent(y.Link)}}>
-                  <Image source={require('./images/copypaste.png')}
-                style={{width: 40, height: 40}}/>
+                  <Image source={require('./images/copy.png')}
+                style={{width: 35, height: 35}}/>
                 </TouchableOpacity>}
               bottomDivider
               >

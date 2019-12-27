@@ -11,6 +11,7 @@ import {
     PermissionsAndroid
 } from "react-native";
 
+import CustomAlert from '../Login/Component/CustomAlert';
 import QRCode from 'react-native-qrcode-svg';
 import fetch_blob from 'react-native-fetch-blob';
 import RNFS from 'react-native-fs';
@@ -24,16 +25,35 @@ class qrcodegenerator extends Component {
             valueForQRCode:null,
             Files:null,
             name :"MyQRCODE.png",
-            granted:null
+            granted:null,
+            condNoUp:false, //Nothing to Update
+            condSave:false, // Save QR Image
+            filePath :null, // Path Directory
+            perDenied: false, // Storage Permission
         }
 
     }
    
+    SaveImage = () => {
+        this.setState({condSave: false ,},
+        
+          );
+          }
+    NothingtoUpdate = () => {
+        this.setState({condNoUp: false ,}
+            
+          );
+          }
+    PermisDenied = () => {
+        this.setState({perDenied: false ,}
+            
+          );
+          }
+
     contShareQR =()=>{
         if(!this.state.valueForQRCode && this.state.granted==='granted'){
-            Alert.alert(
-                'Alert',
-                'Nothing to Save!')
+            console.log('Nothing to Save');
+            this.setState({condNoUp:true});
         }
         else{
             const fs = fetch_blob.fs
@@ -63,10 +83,10 @@ class qrcodegenerator extends Component {
                     
                 RNFS.writeFile(file_path, shareImageBase64, 'base64')
                 .then(()=>{
-                    Alert.alert(
-                        'Image Saved in Gallery',
-                        `Saved in ${file_path}`)
+                    this.setState({condSave:true})
+                    this.setState({filePath:file_path})
                     console.log('Image Saved in Gallery')})
+                    
                 .catch((error) => {
                     alert(JSON.stringify(error));
                 });
@@ -81,6 +101,7 @@ class qrcodegenerator extends Component {
         
     }
     shareQR=() =>{
+        
         let that=this;
         if(Platform.OS === 'android'){
             async function reqeustStoragePermission(){
@@ -98,7 +119,8 @@ class qrcodegenerator extends Component {
                         console.log(PermissionsAndroid.RESULTS.GRANTED)
                         that.contShareQR()
                     } else {
-                        Alert.alert("Storage permission denied");
+                        that.setState({perDenied:true})
+                        console.log('Storage Permission Denied')
                     }
                 }
                 catch(err){
@@ -107,12 +129,12 @@ class qrcodegenerator extends Component {
                 }
             }
             reqeustStoragePermission();
+            
         }
         else{
             that.contShareQR()
 
         }
-        
     }
 
     render() {
@@ -164,6 +186,40 @@ class qrcodegenerator extends Component {
                     <Text style={styles.TextStyle}>SAVE QR CODE</Text>
                 </TouchableOpacity>
                 </View>
+
+                {/* Saved Images */}
+                <CustomAlert
+                    displayAlert={this.state.condSave}
+                    //displayAlertIcon={true} //untuk show icon
+                    alertTitleText={' '}
+                    alertMessageText={'\t\t\t\t\t\t\t\tImage Saved in Gallery\n\n'+'Path:\t'+this.state.filePath + '\n'}
+                    displayPositiveButton={true}
+                    positiveButtonText={'OK'}
+                    onPressPositiveButton={this.SaveImage}
+                />
+
+                {/* Nothing To Update */}
+                <CustomAlert
+                    displayAlert={this.state.condNoUp}
+                    //displayAlertIcon={true} //untuk show icon
+                    alertTitleText={' '}
+                    alertMessageText={'Nothing to Update'}
+                    displayPositiveButton={true}
+                    positiveButtonText={'OK'}
+                    onPressPositiveButton={this.NothingtoUpdate}
+                />
+
+                {/* Storage Permission Denied*/}
+                <CustomAlert
+                    displayAlert={this.state.perDenied}
+                    //displayAlertIcon={true} //untuk show icon
+                    alertTitleText={' '}
+                    alertMessageText={'Storage Permission Denied'}
+                    displayPositiveButton={true}
+                    positiveButtonText={'OK'}
+                    onPressPositiveButton={this.PermisDenied}
+                />
+                
             </View>
         );
     }
