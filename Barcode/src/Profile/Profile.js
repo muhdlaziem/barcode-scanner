@@ -33,7 +33,9 @@ export default class Profile extends Component {
       
     }
   }
-
+  componentDidMount(){
+    console.log('Mount Something')
+  }
   onPressAlertNegativeButton = () => {
     this.setState({condNothing: false ,}
         

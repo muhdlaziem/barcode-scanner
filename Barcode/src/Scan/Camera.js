@@ -18,6 +18,8 @@ import SplashScreen from 'react-native-splash-screen';
 import { CameraKitCameraScreen, } from 'react-native-camera-kit';
 import {addLink} from '../CRUD/CRUD';
 import Clipboard from "@react-native-community/react-native-clipboard";
+// import * as firebase from "firebase";
+
 //import CameraKitCameraScreen we are going to use.
 
 // import {CurrentUser} from '../Login/Login';

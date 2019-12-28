@@ -3,7 +3,7 @@ import {View, Text, TextInput, StyleSheet, Button, Image, StatusBar,TouchableOpa
 import * as firebase from "firebase";
 import CustomAlert from './Component/CustomAlert';
 import SplashScreen from 'react-native-splash-screen';
-import {app} from '../CRUD/fbconfig'
+// import {app} from '../CRUD/fbconfig'
 export let CurrentUser = null;
 export default class App extends Component {
 
@@ -14,6 +14,7 @@ export default class App extends Component {
 
   componentDidMount() {
     SplashScreen.hide()
+    
   }
 
   constructor(props) {
@@ -62,7 +63,7 @@ export default class App extends Component {
 
 
   render(){
-
+    
     return(
       <View style={styles.screen}>
       <StatusBar backgroundColor = "white" barStyle = "dark-content"/>

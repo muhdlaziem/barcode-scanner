@@ -95,8 +95,6 @@ class qrcodegenerator extends Component {
             .catch((err) => {
             console.log(err.message, err.code);
             });
-            this.textInput.clear()
-            this.setState({valueForQRCode:null})
         }
         
     }
@@ -118,6 +116,7 @@ class qrcodegenerator extends Component {
                         console.log(granted)
                         console.log(PermissionsAndroid.RESULTS.GRANTED)
                         that.contShareQR()
+
                     } else {
                         that.setState({perDenied:true})
                         console.log('Storage Permission Denied')
@@ -135,6 +134,11 @@ class qrcodegenerator extends Component {
             that.contShareQR()
 
         }
+
+        // this.setState({valueForQRCode:null})
+        // this.textInput.clear()
+
+
     }
 
     render() {
@@ -203,7 +207,7 @@ class qrcodegenerator extends Component {
                     displayAlert={this.state.condNoUp}
                     //displayAlertIcon={true} //untuk show icon
                     alertTitleText={' '}
-                    alertMessageText={'Nothing to Update'}
+                    alertMessageText={'Nothing to Save'}
                     displayPositiveButton={true}
                     positiveButtonText={'OK'}
                     onPressPositiveButton={this.NothingtoUpdate}
