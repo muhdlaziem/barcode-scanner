@@ -61,7 +61,7 @@ Functionalities
     _____________________
     2. Login Page
     
-     
+     ![Login Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/Login.jpg)
     
     User can choose either they want to sign in or sign in as guest. If user does not have any account, they need to click to Sign Up button to be redirected to Sign Up page.
     
@@ -96,7 +96,7 @@ Functionalities
         
     5. QR Generator Page
     
-    ![QR Generator Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/Generator.jpg)
+    ![QR Generator Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/Generate.jpg)
     
     This is the QR Generator Page. User will fill with any link that they desired in the text field ,click the Generate QR Code button and an image of the QR will be generated.
     
@@ -109,6 +109,7 @@ Functionalities
     6. History List
     
     ![History Screen](https://raw.githubusercontent.com/muhdlaziem/barcode-scanner/master/images/List.jpg)
+
     
     This is the History List Page. Every link that was scanned by the user will be saved in the history list. User can delete any link by holding the link and a popup message will pop.
     
